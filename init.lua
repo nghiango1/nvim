@@ -292,7 +292,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.cmd [[
 " Setup compiler
 " pascal
-set makeprg=fpc\ %
+set makeprg=fpc\ %\ -vewnhr
 " c
 " set makeprg=gcc\ -fdiagnostics-plain-output\ -g\ -I.\ -o\ %:r\ %
 
@@ -321,6 +321,9 @@ nnoremap <silent> <leader>cn :cn<CR>
 nnoremap <silent> <leader>cp :cp<CR>
 nnoremap <silent> <leader>cN :cp<CR>
 nnoremap <silent> <F5> :!%:r<CR>
+nnoremap <silent> <leader>bn :bn<CR>
+nnoremap <silent> <leader>bN :bp<CR>
+nnoremap <silent> <leader>bd :bd<CR>
 
 
 nnoremap <leader>dc :make<CR>
