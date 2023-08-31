@@ -186,7 +186,7 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.config/nvim/lua/ylsama/.<CR>");
+vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/AppData/Local/nvim/init.lua<CR>");
 vim.keymap.set("n", "C-h", "`H");
 vim.keymap.set("n", "C-i", "`I");
 
@@ -221,8 +221,7 @@ require('nvim-treesitter.configs').setup {
   modules = {},
   sync_install = false,
   ignore_install = {},
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-    'pascal' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
 
   auto_install = false,
 
@@ -321,6 +320,7 @@ nnoremap <silent> <leader>cdN :cnewer<CR>
 nnoremap <silent> <leader>cn :cn<CR>
 nnoremap <silent> <leader>cp :cp<CR>
 nnoremap <silent> <leader>cN :cp<CR>
+nnoremap <silent> <F5> :!%:r<CR>
 
 
 nnoremap <leader>dc :make<CR>
