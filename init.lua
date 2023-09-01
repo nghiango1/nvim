@@ -96,6 +96,11 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  {
+    'nvim-treesitter/playground',
+    build = ':TSInstall query',
+  },
+
 }, {})
 
 -- [[ Setting options ]]
@@ -226,7 +231,7 @@ require('nvim-treesitter.configs').setup {
   auto_install = false,
 
   highlight = { enable = true },
-  indent = { enable = true },
+  indent = { enable = false },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -292,7 +297,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.cmd [[
 " Setup compiler
 " pascal
-set makeprg=fpc\ %\ -vewnhr
+set makeprg=fpc\ %\ -vewnhrb
 " c
 " set makeprg=gcc\ -fdiagnostics-plain-output\ -g\ -I.\ -o\ %:r\ %
 
@@ -301,7 +306,7 @@ set makeprg=fpc\ %\ -vewnhr
 
 " rust cargo
 " set makeprg=cargo\ build\ --message-format=short
-set errorformat=%f:%l:%c:%t:%m,%f:%l:%c:%m,%f:%m,%m
+" set errorformat=%f:%l:%c:%t:%m,%f:%l:%c:%m,%f:%m,%m
 
 " Toggle quickfix window
 function! ToggleQuickfix()
