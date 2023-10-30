@@ -25,6 +25,7 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
 
+    dapui.register_element('hover', dapui.elements.hover)
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations

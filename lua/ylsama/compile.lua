@@ -30,7 +30,7 @@ nnoremap <silent> <leader>cn :cn<CR>
 nnoremap <silent> <leader>cp :cp<CR>
 nnoremap <silent> <leader>cN :cp<CR>
 " nnoremap <silent> <F5> :!%:r<CR>
-nnoremap <silent> <F5> :!%:r<CR>
+" nnoremap <silent> <F5> :!%:r<CR>
 nnoremap <silent> <leader>bn :bn<CR>
 nnoremap <silent> <leader>bN :bp<CR>
 nnoremap <silent> <leader>bd :bd<CR>
