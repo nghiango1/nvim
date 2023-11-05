@@ -272,7 +272,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- My Config options
-require("ylsama.keymap")
+require("ylsama.set")
 
 -- [[ Basic Keymaps ]]
 
