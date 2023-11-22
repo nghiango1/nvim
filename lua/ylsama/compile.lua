@@ -23,12 +23,12 @@ endfunction
 
 " Quick fix list
 nnoremap <silent> <leader>di :call ToggleQuickfix()<CR>
-nnoremap <silent> <leader>ci :call ToggleQuickfix()<CR>
-nnoremap <silent> <leader>cdn :colder<CR>
-nnoremap <silent> <leader>cdN :cnewer<CR>
-nnoremap <silent> <leader>cn :cn<CR>
-nnoremap <silent> <leader>cp :cp<CR>
-nnoremap <silent> <leader>cN :cp<CR>
+"nnoremap <silent> <leader>ci :call ToggleQuickfix()<CR>
+"nnoremap <silent> <leader>cdn :colder<CR>
+"nnoremap <silent> <leader>cdN :cnewer<CR>
+"nnoremap <silent> <leader>cn :cn<CR>
+"nnoremap <silent> <leader>cp :cp<CR>
+"nnoremap <silent> <leader>cN :cp<CR>
 " nnoremap <silent> <F5> :!%:r<CR>
 " nnoremap <silent> <F5> :!%:r<CR>
 nnoremap <silent> <leader>bn :bn<CR>
