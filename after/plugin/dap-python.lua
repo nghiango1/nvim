@@ -16,8 +16,7 @@ dap.adapters.python = function(cb, config)
     else
         cb({
             type = 'executable',
-            command = '/home/termux/.virtualenvs/debugpy/bin/python',
-            args = { '-m', 'debugpy.adapter' },
+            command = 'debugpy-adapter',
             options = {
                 source_filetype = 'python',
             },
