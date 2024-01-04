@@ -1,5 +1,4 @@
 --[[
-
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -275,6 +274,8 @@ vim.o.termguicolors = true
 require("ylsama.set")
 
 -- [[ Basic Keymaps ]]
+-- Telex language keymap
+require("ylsama.telex")
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -534,6 +535,13 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
+    ["<c-a>"] = cmp.mapping.complete {
+      config = {
+        sources = {
+          { name = "cody" },
+        },
+      },
+    },
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
@@ -563,6 +571,7 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
+    { name = 'cody' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
