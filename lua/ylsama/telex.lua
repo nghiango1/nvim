@@ -1,4 +1,8 @@
 vim.cmd [[
+noremap <F2> <C-^>
+inoremap <F2> <C-^>
+inoremap <F3> :so %<CR>
+
 " Telex dummy
 "gi
 lnoremap gi gi
@@ -479,6 +483,12 @@ lnoremap eetj ệt
 lnoremap eetr ểt
 lnoremap eetx ễt
 
+lnoremap etse ết
+lnoremap etfe ềt
+lnoremap etje ệt
+lnoremap etre ểt
+lnoremap etxe ễt
+
 "oa
 " lnoremap oas oá
 " lnoremap oaf oà
@@ -591,11 +601,35 @@ lnoremap ooyj ộy
 lnoremap ooyr ổy
 lnoremap ooyx ỗy
 
+lnoremap oyso ốy
+lnoremap oyfo ồy
+lnoremap oyjo ộy
+lnoremap oyro ổy
+lnoremap oyxo ỗy
+
+lnoremap oyos ốy
+lnoremap oyof ồy
+lnoremap oyoj ộy
+lnoremap oyor ổy
+lnoremap oyox ỗy
+
 lnoremap oois ối
 lnoremap ooif ồi
 lnoremap ooij ội
 lnoremap ooir ổi
 lnoremap ooix ỗi
+
+lnoremap oios ối
+lnoremap oiof ồi
+lnoremap oioj ội
+lnoremap oior ổi
+lnoremap oiox ỗi
+
+lnoremap oiso ối
+lnoremap oifo ồi
+lnoremap oijo ội
+lnoremap oiro ổi
+lnoremap oixo ỗi
 
 lnoremap oons ốn
 lnoremap oonf ồn
@@ -603,11 +637,41 @@ lnoremap oonj ộn
 lnoremap oonr ổn
 lnoremap oonx ỗn
 
+lnoremap onos ốn
+lnoremap onof ồn
+lnoremap onoj ộn
+lnoremap onor ổn
+lnoremap onox ỗn
+
+lnoremap onso ốn
+lnoremap onfo ồn
+lnoremap onjo ộn
+lnoremap onro ổn
+lnoremap onxo ỗn
+
 lnoremap oongs ống
 lnoremap oongf ồng
 lnoremap oongj ộng
 lnoremap oongr ổng
 lnoremap oongx ỗng
+
+lnoremap onogs ống
+lnoremap onogf ồng
+lnoremap onogj ộng
+lnoremap onogr ổng
+lnoremap onogx ỗng
+
+lnoremap ongos ống
+lnoremap ongof ồng
+lnoremap ongoj ộng
+lnoremap ongor ổng
+lnoremap ongox ỗng
+
+lnoremap ongso ống
+lnoremap ongfo ồng
+lnoremap ongjo ộng
+lnoremap ongro ổng
+lnoremap ongxo ỗng
 
 lnoremap oonhs ốnh
 lnoremap oonhf ồnh
@@ -621,11 +685,35 @@ lnoremap oocj ộc
 lnoremap oocr ổc
 lnoremap oocx ỗc
 
+lnoremap ocos ốc
+lnoremap ocof ồc
+lnoremap ocoj ộc
+lnoremap ocor ổc
+lnoremap ocox ỗc
+
+lnoremap ocso ốc
+lnoremap ocfo ồc
+lnoremap ocjo ộc
+lnoremap ocro ổc
+lnoremap ocxo ỗc
+
 lnoremap oops ốp
 lnoremap oopf ồp
 lnoremap oopj ộp
 lnoremap oopr ổp
 lnoremap oopx ỗp
+
+lnoremap opos ốp
+lnoremap opof ồp
+lnoremap opoj ộp
+lnoremap opor ổp
+lnoremap opox ỗp
+
+lnoremap opso ốp
+lnoremap opfo ồp
+lnoremap opjo ộp
+lnoremap opro ổp
+lnoremap opxo ỗp
 
 lnoremap ooms ốm
 lnoremap oomf ồm
@@ -633,11 +721,35 @@ lnoremap oomj ộm
 lnoremap oomr ổm
 lnoremap oomx ỗm
 
+lnoremap omos ốm
+lnoremap omof ồm
+lnoremap omoj ộm
+lnoremap omor ổm
+lnoremap omox ỗm
+
+lnoremap omso ốm
+lnoremap omfo ồm
+lnoremap omjo ộm
+lnoremap omro ổm
+lnoremap omxo ỗm
+
 lnoremap oots ốt
 lnoremap ootf ồt
 lnoremap ootj ột
 lnoremap ootr ổt
 lnoremap ootx ỗt
+
+lnoremap otos ốt
+lnoremap otof ồt
+lnoremap otoj ột
+lnoremap otor ổt
+lnoremap otox ỗt
+
+lnoremap otso ốt
+lnoremap otfo ồt
+lnoremap otjo ột
+lnoremap otro ổt
+lnoremap otxo ỗt
 
 "ơ
 lnoremap ow ơ
