@@ -65,6 +65,12 @@ lnoremap amj ạm
 lnoremap amr ảm
 lnoremap amx ãm
 
+lnoremap achs ách
+lnoremap achf àch
+lnoremap achj ạch
+lnoremap achr ảch
+lnoremap achx ãch
+
 lnoremap acs ác
 lnoremap acf àc
 lnoremap acj ạc
@@ -217,6 +223,12 @@ lnoremap aacf ầc
 lnoremap aacj ậc
 lnoremap aacr ẩc
 lnoremap aacx ẫc
+
+lnoremap apas ấp
+lnoremap apaf ầp
+lnoremap apaj ập
+lnoremap apar ẩp
+lnoremap apax ẫp
 
 lnoremap aaps ấp
 lnoremap aapf ầp
@@ -429,11 +441,23 @@ lnoremap eje ệ
 lnoremap ere ể
 lnoremap exe ễ
 
+lnoremap eyes ếy
+lnoremap eyef ềy
+lnoremap eyej ệy
+lnoremap eyer ểy
+lnoremap eyex ễy
+
 lnoremap eeys ếy
 lnoremap eeyf ềy
 lnoremap eeyj ệy
 lnoremap eeyr ểy
 lnoremap eeyx ễy
+
+lnoremap eies ếi
+lnoremap eief ềi
+lnoremap eiej ệi
+lnoremap eier ểi
+lnoremap eiex ễi
 
 lnoremap eeis ếi
 lnoremap eeif ềi
@@ -441,11 +465,35 @@ lnoremap eeij ệi
 lnoremap eeir ểi
 lnoremap eeix ễi
 
+lnoremap enes ến
+lnoremap enef ền
+lnoremap enej ện
+lnoremap ener ển
+lnoremap enex ễn
+
 lnoremap eens ến
 lnoremap eenf ền
 lnoremap eenj ện
 lnoremap eenr ển
 lnoremap eenx ễn
+
+lnoremap enges ếng
+lnoremap engef ềng
+lnoremap engej ệng
+lnoremap enger ểng
+lnoremap engex ễng
+
+lnoremap enges ếng
+lnoremap engef ềng
+lnoremap engej ệng
+lnoremap enger ểng
+lnoremap engex ễng
+
+lnoremap enegs ếng
+lnoremap enegf ềng
+lnoremap enegj ệng
+lnoremap enegr ểng
+lnoremap enegx ễng
 
 lnoremap eengs ếng
 lnoremap eengf ềng
@@ -1066,6 +1114,12 @@ lnoremap uwf ừ
 lnoremap uwj ự
 lnoremap uwr ử
 lnoremap uwx ữ
+
+lnoremap ws ứ
+lnoremap wf ừ
+lnoremap wj ự
+lnoremap wr ử
+lnoremap wx ữ
 
 lnoremap usw ứ
 lnoremap ufw ừ
