@@ -1,7 +1,10 @@
 vim.cmd [[
+noremap <F4> :set wrap lbr<CR>
 noremap <F2> <C-^>
-inoremap <F2> <C-^>
-inoremap <F3> :so %<CR>
+tnoremap <F2> <C-\><C-o><C-^>
+inoremap <F2> <C-\><C-o><C-^>
+noremap <F3> :set imi=1<CR>
+inoremap <F3> <C-^>
 
 " Telex dummy
 "gi
@@ -182,11 +185,30 @@ lnoremap aaz aa
 
 "â
 lnoremap aa â
+
 lnoremap aas ấ
 lnoremap aaf ầ
 lnoremap aaj ậ
 lnoremap aar ẩ
 lnoremap aax ẫ
+
+lnoremap asa ấ
+lnoremap afa ầ
+lnoremap aja ậ
+lnoremap ara ẩ
+lnoremap axa ẫ
+
+lnoremap aysa ấy
+lnoremap ayfa ầy
+lnoremap ayja ậy
+lnoremap ayra ẩy
+lnoremap ayxa ẫy
+
+lnoremap ayas ấy
+lnoremap ayaf ầy
+lnoremap ayaj ậy
+lnoremap ayar ẩy
+lnoremap ayax ẫy
 
 lnoremap aays ấy
 lnoremap aayf ầy
@@ -194,11 +216,35 @@ lnoremap aayj ậy
 lnoremap aayr ẩy
 lnoremap aayx ẫy
 
+lnoremap aisa ấi
+lnoremap aifa ầi
+lnoremap aija ậi
+lnoremap aira ẩi
+lnoremap aixa ẫi
+
+lnoremap aias ấi
+lnoremap aiaf ầi
+lnoremap aiaj ậi
+lnoremap aiar ẩi
+lnoremap aiax ẫi
+
 lnoremap aais ấi
 lnoremap aaif ầi
 lnoremap aaij ậi
 lnoremap aair ẩi
 lnoremap aaix ẫi
+
+lnoremap ansa ấn
+lnoremap anfa ần
+lnoremap anja ận
+lnoremap anra ẩn
+lnoremap anxa ẫn
+
+lnoremap anas ấn
+lnoremap anaf ần
+lnoremap anaj ận
+lnoremap anar ẩn
+lnoremap anax ẫn
 
 lnoremap aans ấn
 lnoremap aanf ần
@@ -206,23 +252,59 @@ lnoremap aanj ận
 lnoremap aanr ẩn
 lnoremap aanx ẫn
 
+lnoremap angsa ấng
+lnoremap angfa ầng
+lnoremap angja ậng
+lnoremap angra ẩng
+lnoremap angxa ẫng
+
+lnoremap angas ấng
+lnoremap angaf ầng
+lnoremap angaj ậng
+lnoremap angar ẩng
+lnoremap angax ẫng
+
+lnoremap anags ấng
+lnoremap anagf ầng
+lnoremap anagj ậng
+lnoremap anagr ẩng
+lnoremap anagx ẫng
+
 lnoremap aangs ấng
 lnoremap aangf ầng
 lnoremap aangj ậng
 lnoremap aangr ẩng
 lnoremap aangx ẫng
 
-lnoremap aanhs ấnh
-lnoremap aanhf ầnh
-lnoremap aanhj ậnh
-lnoremap aanhr ẩnh
-lnoremap aanhx ẫnh
+" lnoremap aanhs ấnh
+" lnoremap aanhf ầnh
+" lnoremap aanhj ậnh
+" lnoremap aanhr ẩnh
+" lnoremap aanhx ẫnh
+
+lnoremap acsa ấc
+lnoremap acfa ầc
+lnoremap acja ậc
+lnoremap acra ẩc
+lnoremap acxa ẫc
+
+lnoremap acas ấc
+lnoremap acaf ầc
+lnoremap acaj ậc
+lnoremap acar ẩc
+lnoremap acax ẫc
 
 lnoremap aacs ấc
 lnoremap aacf ầc
 lnoremap aacj ậc
 lnoremap aacr ẩc
 lnoremap aacx ẫc
+
+lnoremap apsa ấp
+lnoremap apfa ầp
+lnoremap apja ập
+lnoremap apra ẩp
+lnoremap apxa ẫp
 
 lnoremap apas ấp
 lnoremap apaf ầp
@@ -236,23 +318,41 @@ lnoremap aapj ập
 lnoremap aapr ẩp
 lnoremap aapx ẫp
 
+lnoremap amsa ấm
+lnoremap amfa ầm
+lnoremap amja ậm
+lnoremap amra ẩm
+lnoremap amxa ẫm
+
+lnoremap amas ấm
+lnoremap amaf ầm
+lnoremap amaj ậm
+lnoremap amar ẩm
+lnoremap amax ẫm
+
 lnoremap aams ấm
 lnoremap aamf ầm
 lnoremap aamj ậm
 lnoremap aamr ẩm
 lnoremap aamx ẫm
 
+lnoremap atsa ất
+lnoremap atfa ầt
+lnoremap atja ật
+lnoremap atra ẩt
+lnoremap atxa ẫt
+
+lnoremap atas ất
+lnoremap ataf ầt
+lnoremap ataj ật
+lnoremap atar ẩt
+lnoremap atax ẫt
+
 lnoremap aats ất
 lnoremap aatf ầt
 lnoremap aatj ật
 lnoremap aatr ẩt
 lnoremap aatx ẫt
-
-lnoremap asa ấ
-lnoremap afa ầ
-lnoremap aja ậ
-lnoremap ara ẩ
-lnoremap axa ẫ
 
 "iê
 lnoremap iense iến
@@ -407,6 +507,12 @@ lnoremap emf èm
 lnoremap emj ẹm
 lnoremap emr ẻm
 lnoremap emx ẽm
+
+lnoremap eos éo
+lnoremap eof èo
+lnoremap eoj ẹo
+lnoremap eor ẻo
+lnoremap eox ẽo
 
 lnoremap ets ét
 lnoremap etf èt

@@ -563,6 +563,15 @@ cmp.setup {
   },
   sources = {
     -- { name = 'cody' },
+    {
+      name = 'look',
+      keyword_length = 2,
+      option = {
+        convert_case = true,
+        loud = true
+        --dict = '/usr/share/dict/words'
+      }
+    },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
