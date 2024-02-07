@@ -34,7 +34,7 @@ dap.configurations.rust = {
 
 dap.configurations.c = {
     {
-        name = "Launch DAP defaul",
+        name = "Launch DAP default",
         type = "c",
         request = "launch",
         program = "${workspaceFolder}/dist/${fileBasenameNoExtension}",
