@@ -1,25 +1,35 @@
-require("dap-vscode-js").setup {
-    node_path = "node", -- Path of node executable. vscode-js-debug require node verson 16
-    adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+local dap = require("dap")
+
+dap.adapters["pwa-node"] = {
+	type = "server",
+	host = "localhost",
+	port = "${port}",
+	executable = {
+		-- command = "node",
+		-- -- 💀 Make sure to update this path to point to your installation
+		-- args = { "/path/to/js-debug/src/dapDebugServer.js", "${port}" },
+		command = "js-debug-adapter",
+		args = { "${port}" },
+	},
 }
 
-local dap = require('dap')
-local js_languages = { "typescript", "javascript", "typescriptreact" }
+local js_languages = { "typescript", "javascript", "typescript" }
 for _, language in ipairs(js_languages) do
     dap.configurations[language] = {
-        {
-            type = "pwa-node",
-            request = "attach",
-            name = "Attach launch --inspect node",
-            console = "integratedTerminal",
-            cwd = "${workspaceFolder}",
-        },
         {
             type = "pwa-node",
             request = "launch",
             name = "Launch file",
             console = "integratedTerminal",
             program = "${file}",
+            cwd = "${workspaceFolder}",
+        },
+        {
+            type = "pwa-node",
+            request = "attach",
+            name = "Attach launch --inspect node",
+            console = "integratedTerminal",
+            processId = require("dap.utils").pick_process,
             cwd = "${workspaceFolder}",
         },
         {
