@@ -43,4 +43,13 @@ dap.configurations.c = {
     },
 }
 
-dap.configurations.cpp = dap.configurations.rust
+dap.configurations.cpp = {
+    {
+        name = "Launch DAP default",
+        type = "cpp",
+        request = "launch",
+        program = "${workspaceFolder}/dist/${fileBasenameNoExtension}",
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+    },
+}

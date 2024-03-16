@@ -3,7 +3,9 @@ vim.cmd [[
 " pascal
 " set makeprg=fpc\ %\ -vewnhrb
 " c
-set makeprg=gcc\ -fdiagnostics-plain-output\ -g\ -I.\ -o\ dist/%:r\ %
+" set makeprg=gcc\ -fdiagnostics-plain-output\ -g\ -I.\ -o\ dist/%:r\ %
+" cpp
+set makeprg=g++\ %\ -o\ dist/%:r\ -fdiagnostics-plain-output\ -g\ -Wall\ -Wextra
 
 " rust standalone
 " set makeprg=rustc\ -g\ --error-format=short\ -o\ %:r\ %
