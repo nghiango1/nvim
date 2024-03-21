@@ -107,7 +107,7 @@ require('lazy').setup({
 }, {})
 
 vim.o.hlsearch = false
-vim.wo.number = true
+vim.o.number = true
 vim.o.mouse = 'a'
 
 -- Enable break indent
@@ -150,7 +150,6 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- My basic keymap config
 require("ylsama.keymap")
-require("ylsama.compile")
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

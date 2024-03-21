@@ -1,7 +1,7 @@
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.interingo = {
   install_info = {
-    url = "/home/osadmin/workspace/InterinGo/tree-sitter-interingo", -- local path or git repo
+    url = "~/workspace/InterinGo/tree-sitter-interingo", -- local path or git repo
     files = { "src/parser.c" },                                        -- note that some parsers also require src/scanner.c or src/scanner.cc
     -- optional entries:
     branch = "main",                                                   -- default branch in case of git repo if different from master
@@ -35,3 +35,5 @@ lspconfig.interingo.setup({
   capabilities = capabilities,
   filetypes = { "interingo" },
 })
+
+vim.cmd [[ nnoremap <F5> :!interingo -f % ]]
