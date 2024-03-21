@@ -7,7 +7,7 @@ sg.setup {
 
 
 -- vim.keymap.set('v', '<leader>cs', ':CodyAsk<CR>', {})
-vim.keymap.set('n', '<leader>cc', ':CodyChat<CR>', {})
+-- vim.keymap.set('n', '<leader>cc', ':CodyChat<CR>', {})
 vim.keymap.set('n', '<F1>', ':CodyToggle<CR>', {})
 
 vim.keymap.set('n', '<leader>ch', function()
