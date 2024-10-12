@@ -29,15 +29,19 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- Normally I work with <leader>cn and <leader>cN
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>cn", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<leader>cN", "<cmd>cprev<CR>zz")
 
 -- Visual mode paste without changing register " value
-vim.keymap.set("x", "<leader>p", [["_dP]])
+-- vim.keymap.set("x", "<leader>p", [["_dP]])
+-- Paste using tmux register
+vim.keymap.set("x", "<leader>p", [[:let @0 = system("tmux save-buffer -")<cr>"0p<cr>g;]])
+
+-- Copy to tmux register
+vim.keymap.set({ "n", "v" }, "<leader>y", [[y:call system("tmux load-buffer -", @0)<cr>]])
 
 -- Copy to register + (system cliboard)
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set({ "n", "v" }, "<leader>Y", [["+y]])
 
 -- Delete to register + (? Why we need this again)
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
