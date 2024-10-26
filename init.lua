@@ -203,6 +203,18 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
+    config = function()
+      -- Ruby indent isn't that rely able with `.`
+      -- This is 1st trick
+      vim.cmd('autocmd FileType ruby setlocal indentkeys-=.');
+      -- This is 2nd trick, which just disable TS indent with ruby file
+      -- require 'nvim-treesitter.configs'.setup {
+      --   indent = {
+      --     enable = true,
+      --     disable = { 'ruby' },
+      --   },
+      -- }
+    end,
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
