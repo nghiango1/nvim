@@ -1,12 +1,12 @@
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-parser_config.interingo = {
+parser_config["interingo"] = {
   install_info = {
     url = "/home/osadmin/workspace/InterinGo/tree-sitter-interingo", -- local path or git repo
-    files = { "src/parser.c" },                                        -- note that some parsers also require src/scanner.c or src/scanner.cc
+    files = { "src/parser.c" },                                      -- note that some parsers also require src/scanner.c or src/scanner.cc
     -- optional entries:
-    branch = "main",                                                   -- default branch in case of git repo if different from master
-    generate_requires_npm = false,                                     -- if stand-alone parser without npm dependencies
-    requires_generate_from_grammar = false,                            -- if folder contains pre-generated src/parser.c
+    branch = "main",                                                 -- default branch in case of git repo if different from master
+    generate_requires_npm = false,                                   -- if stand-alone parser without npm dependencies
+    requires_generate_from_grammar = false,                          -- if folder contains pre-generated src/parser.c
   },
 }
 
@@ -17,12 +17,12 @@ local lspconfig = require('lspconfig')
 local configs = require('lspconfig.configs')
 
 local function custom_root_dir(filename, bufnr)
-    return vim.fn.getcwd()
+  return vim.fn.getcwd()
 end
 
 configs.interingo = {
   default_config = {
-    cmd = { 'interingo-lsp' },
+    cmd = { '/home/osadmin/workspace/InterinGo/lsp-interingo/interingo-lsp' },
     filetypes = { 'interingo' },
     -- root_dir = lspconfig.util.root_pattern('.git', 'deluge'),
     root_dir = custom_root_dir,
