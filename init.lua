@@ -46,17 +46,16 @@ vim.g.maplocalleader = ' '
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  }
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+  if vim.v.shell_error ~= 0 then
+    error('Error cloning lazy.nvim:\n' .. out)
+  end
 end
-vim.opt.rtp:prepend(lazypath)
+
+local rtp = vim.opt.rtp
+rtp:prepend(lazypath)
 
 -- NOTE: Here is where you install your plugins.
 --  You can configure plugins using the `config` key.
@@ -74,6 +73,18 @@ require('lazy').setup({
   'tpope/vim-sleuth',
 
   -- NOTE: This is where your plugins related to LSP can be installed.
+  {
+    -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+    -- used for completion, annotations and signatures of Neovim apis
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        -- Load luvit types when the `vim.uv` word is found
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
   --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
@@ -88,7 +99,7 @@ require('lazy').setup({
       { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      -- 'folke/neodev.nvim',
     },
   },
 
@@ -109,7 +120,7 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -196,25 +207,48 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Highlight, edit, and navigate code
+  { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
+    branch = 'master', -- <--- ADD THIS LINE
     build = ':TSUpdate',
-    config = function()
-      -- Ruby indent isn't that rely able with `.`
-      -- This is 1st trick
-      vim.cmd('autocmd FileType ruby setlocal indentkeys-=.');
-      -- This is 2nd trick, which just disable TS indent with ruby file
-      -- require 'nvim-treesitter.configs'.setup {
-      --   indent = {
-      --     enable = true,
-      --     disable = { 'ruby' },
-      --   },
-      -- }
-    end,
+    -- main = 'nvim-treesitter.config', -- Sets main module to use for opts
+    -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+    opts = {
+      -- https://stackoverflow.com/questions/78845415/treesitter-says-no-parser-for-lua-after-adding-lazy-nvim-to-my-config
+      -- lazy.nvim "resets the runtime path to $VIMRUNTIME and your config directory".
+      -- That renders the builtin parsers unreachable.
+      -- The solution would be to either turn this default setting off or to install
+      -- the required parsers with the nvim-treesitter plugin
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      -- Autoinstall languages that are not installed
+      auto_install = true,
+      highlight = {
+        enable = true,
+        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+        --  If you are experiencing weird indenting issues, add the language to
+        --  the list of additional_vim_regex_highlighting and disabled languages for indent.
+        additional_vim_regex_highlighting = { 'ruby' },
+      },
+      indent = { enable = true, disable = { 'ruby' } },
+    },
+    -- There are additional nvim-treesitter modules that you can use to interact
+    -- with nvim-treesitter. You should go explore a few and see what interests you:
+    --
+    --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
+    --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
+    --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    -- config = function()
+    --   -- Ruby indent isn't that rely able with `.`
+    --   -- This is 1st trick
+    --   vim.cmd('autocmd FileType ruby setlocal indentkeys-=.');
+    --   -- This is 2nd trick, which just disable TS indent with ruby file
+    --   -- require 'nvim-treesitter.configs'.setup {
+    --   --   indent = {
+    --   --     enable = true,
+    --   --     disable = { 'ruby' },
+    --   --   },
+    --   -- }
+    -- end,
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -274,11 +308,11 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- My Config options
-require("ylsama.set")
+require 'ylsama.set'
 
 -- [[ Basic Keymaps ]]
 -- Telex language keymap
-require("ylsama.telex")
+require 'ylsama.telex'
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -289,8 +323,8 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- My basic keymap config
-require("ylsama.keymap")
-require("ylsama.compile")
+require 'ylsama.keymap'
+require 'ylsama.compile'
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -338,7 +372,6 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
@@ -347,65 +380,65 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
-
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-  -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-  -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
-end
+-- local on_attach = function(_, bufnr)
+--   -- NOTE: Remember that lua is a real programming language, and as such it is possible
+--   -- to define small helper and utility functions so you don't have to repeat yourself
+--   -- many times.
+--   --
+--   -- In this case, we create a function that lets us more easily define mappings specific
+--   -- for LSP related items. It sets the mode, buffer and description for us each time.
+--   local nmap = function(keys, func, desc)
+--     if desc then
+--       desc = 'LSP: ' .. desc
+--     end
+-- 
+--     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+--   end
+-- 
+--   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+--   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+-- 
+--   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+--   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+--   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+--   nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+--   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+--   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+-- 
+--   -- See `:help K` for why this keymap
+--   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+--   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+-- 
+--   -- Lesser used LSP functionality
+--   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+--   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+--   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+--   nmap('<leader>wl', function()
+--     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+--   end, '[W]orkspace [L]ist Folders')
+-- 
+--   -- Create a command `:Format` local to the LSP buffer
+--   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+--     vim.lsp.buf.format()
+--   end, { desc = 'Format current buffer with LSP' })
+-- end
 
 -- document existing key chains
 require('which-key').add {
-  { "<leader>c",  group = "[C]ode" },
-  { "<leader>c_", hidden = true },
-  { "<leader>d",  group = "[D]ocument" },
-  { "<leader>d_", hidden = true },
-  { "<leader>g",  group = "[G]it" },
-  { "<leader>g_", hidden = true },
-  { "<leader>h",  group = "More git" },
-  { "<leader>h_", hidden = true },
-  { "<leader>r",  group = "[R]ename" },
-  { "<leader>r_", hidden = true },
-  { "<leader>s",  group = "[S]earch" },
-  { "<leader>s_", hidden = true },
-  { "<leader>w",  group = "[W]orkspace" },
-  { "<leader>w_", hidden = true },
+  { '<leader>c', group = '[C]ode' },
+  { '<leader>c_', hidden = true },
+  { '<leader>d', group = '[D]ocument' },
+  { '<leader>d_', hidden = true },
+  { '<leader>g', group = '[G]it' },
+  { '<leader>g_', hidden = true },
+  { '<leader>h', group = 'More git' },
+  { '<leader>h_', hidden = true },
+  { '<leader>r', group = '[R]ename' },
+  { '<leader>r_', hidden = true },
+  { '<leader>s', group = '[S]earch' },
+  { '<leader>s_', hidden = true },
+  { '<leader>w', group = '[W]orkspace' },
+  { '<leader>w_', hidden = true },
 }
 
 -- mason-lspconfig requires that these setup functions are called in this order
@@ -438,29 +471,29 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+-- require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+-- local mason_lspconfig = require 'mason-lspconfig'
 
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
-}
+-- mason_lspconfig.setup {
+--   ensure_installed = vim.tbl_keys(servers),
+-- }
+--
+-- mason_lspconfig.setup_handlers {
+--   function(server_name)
+--     require('lspconfig')[server_name].setup {
+--       capabilities = capabilities,
+--       on_attach = on_attach,
+--       settings = servers[server_name],
+--       filetypes = (servers[server_name] or {}).filetypes,
+--     }
+--   end,
+-- }
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
@@ -476,10 +509,10 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ["<c-a>"] = cmp.mapping.complete {
+    ['<c-a>'] = cmp.mapping.complete {
       config = {
         sources = {
-          { name = "cody" },
+          { name = 'cody' },
         },
       },
     },
