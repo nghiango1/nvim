@@ -211,7 +211,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     branch = 'master', -- <--- ADD THIS LINE
     build = ':TSUpdate',
-    -- main = 'nvim-treesitter.config', -- Sets main module to use for opts
+    main = 'nvim-treesitter.config', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       -- https://stackoverflow.com/questions/78845415/treesitter-says-no-parser-for-lua-after-adding-lazy-nvim-to-my-config
