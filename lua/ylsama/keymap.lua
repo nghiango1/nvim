@@ -22,6 +22,10 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Mark to keep the cursor at place when [J]oin line
 vim.keymap.set("n", "J", "mzJ`z")
 
+-- Wrap should jump base on visual
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
+
 -- Keep thing in the middle when jump
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
